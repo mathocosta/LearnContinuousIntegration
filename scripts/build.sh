@@ -10,11 +10,11 @@ cp ./scripts/profile/$PROFILE_NAME.mobileprovision ~/Library/MobileDevice/Provis
 echo "*********************"
 echo "*     Archiving     *"
 echo "*********************"
-xcrun xcodebuild -project $APP_NAME.xcodeproj -scheme $APP_NAME\ -archivePath $ARCHIVE_NAME.xcarchive archive
+xcrun xcodebuild -project $APP_NAME.xcodeproj -scheme $APP_NAME -sdk iphoneos configuration AppStoreDistribution archive -archivePath "$PWD/build/$ARCHIVE_NAME.xcarchive"
 echo "**********************"
 echo "*     Exporting      *"
 echo "**********************"
-xcrun xcodebuild -exportArchive -archivePath $ARCHIVE_NAME.xcarchive -exportPath . -exportOptionsPlist ExportOptions.plist
+xcrun xcodebuild -exportArchive -archivePath $PWD/build/$ARCHIVE_NAME.xcarchive -exportPath $PWD/build -exportOptionsPlist ExportOptions.plist
 echo "************************************"
 echo "*     Upload to iTunesConnect      *"
 echo "************************************"
