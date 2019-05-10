@@ -5,8 +5,10 @@ if [[ "$TRAVIS_PULL_REQUEST" != "false" ]]; then
 fi
 security list-keychains -s ios-build.keychain
 rm ~/Library/MobileDevice/Provisioning\ Profiles/$PROFILE_NAME.mobileprovision
+rm ~/Library/MobileDevice/Provisioning\ Profiles/Development.mobileprovision
 mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles/
 cp ./scripts/profile/$PROFILE_NAME.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
+cp ./scripts/profile/Development.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
 echo "*********************"
 echo "*     Archiving     *"
 echo "*********************"
