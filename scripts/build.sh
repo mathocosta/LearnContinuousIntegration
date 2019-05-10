@@ -10,8 +10,14 @@ cp ./scripts/profile/$PROFILE_NAME.mobileprovision ~/Library/MobileDevice/Provis
 echo "*********************"
 echo "*     Archiving     *"
 echo "*********************"
-xcrun xcodebuild -workspace $APP_NAME.xcworkspace -scheme $APP_NAME\ Stg -archivePath $ARCHIVE_NAME.xcarchive archive
+xcrun xcodebuild -project $APP_NAME.xcodeproj -scheme $APP_NAME\ Stg -archivePath $ARCHIVE_NAME.xcarchive archive
 echo "**********************"
 echo "*     Exporting      *"
 echo "**********************"
 xcrun xcodebuild -exportArchive -archivePath $ARCHIVE_NAME.xcarchive -exportPath . -exportOptionsPlist ExportOptions.plist
+echo "************************************"
+echo "*     Upload to iTunesConnect      *"
+echo "************************************"
+ln -s "/Applications/Xcode.app/Contents/Applications/Application Loader.app/Contents/Frameworks/ITunesSoftwareService.framework/Support/altool" /usr/local/bin/altool
+ln -s "/Applications/Xcode.app/Contents/Applications/Application Loader.app/Contents/itms" /usr/local/bin/itms #itms is needed, otherwise altool will not work correctly
+altool --upload-app -f "$IPA_NAME.ipa" -u $USERNAME -p $PASSWORD
