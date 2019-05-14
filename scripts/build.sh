@@ -10,7 +10,7 @@ cp ./scripts/profile/$PROFILE_NAME.mobileprovision ~/Library/MobileDevice/Provis
 echo "*********************"
 echo "*     Archiving     *"
 echo "*********************"
-xcrun xcodebuild -workspace LearnContinuousIntegration.xcworkspace -scheme LearnContinuousIntegration Stg -archivePath $ARCHIVE_NAME.xcarchive archive
+xcrun xcodebuild -project $APP_NAME.xcodeproj -scheme LearnContinuousIntegration -sdk iphoneos -configuration AppStoreDistribution -archivePath $ARCHIVE_NAME.xcarchive archive
 echo "**********************"
 echo "*     Exporting      *"
 echo "**********************"
