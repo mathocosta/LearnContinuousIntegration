@@ -5,18 +5,16 @@ if [[ "$TRAVIS_PULL_REQUEST" != "false" ]]; then
 fi
 security list-keychains -s ios-build.keychain
 rm ~/Library/MobileDevice/Provisioning\ Profiles/$PROFILE_NAME.mobileprovision
-rm ~/Library/MobileDevice/Provisioning\ Profiles/Development.mobileprovision
 mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles/
 cp ./scripts/profile/$PROFILE_NAME.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
-cp ./scripts/profile/Development.mobileprovision ~/Library/MobileDevice/Provisioning\ Profiles/
 echo "*********************"
 echo "*     Archiving     *"
 echo "*********************"
-xcrun xcodebuild -project $APP_NAME.xcodeproj -scheme $APP_NAME -sdk iphoneos -configuration AppStoreDistribution -allowProvisioningUpdates archive -archivePath "$PWD/build/$ARCHIVE_NAME.xcarchive"
+xcrun xcodebuild -workspace LearnContinuousIntegration.xcworkspace -scheme LearnContinuousIntegration Stg -archivePath $ARCHIVE_NAME.xcarchive archive
 echo "**********************"
 echo "*     Exporting      *"
 echo "**********************"
-xcrun xcodebuild -exportArchive -archivePath $PWD/build/$ARCHIVE_NAME.xcarchive -exportPath $PWD/build -exportOptionsPlist ExportOptions.plist
+xcrun xcodebuild -exportArchive -archivePath $ARCHIVE_NAME.xcarchive -exportPath . -exportOptionsPlist ExportOptions.plist
 echo "************************************"
 echo "*     Upload to iTunesConnect      *"
 echo "************************************"
