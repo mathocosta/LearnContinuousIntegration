@@ -1,6 +1,13 @@
 language: objective-c
 osx_image: xcode8.3
 install:
-  - bundle install
+- bundle install
 script:
-  - fastlane beta
+- fastlane beta
+env:
+  global:
+    secure: y7+skvU2XDz+4rc3CajJKlnGA/VFtKEiu3rNYe9YLdr+MTIwUf00B3rVEQu9lXcbZRg0+V4bWRP9l8QzcLKTtu5+KkI2EKZiWF+b2To1lpcgkC9JCBxLpUL7i/LxhUNFjAbj/miggyXfxZclyVfjI/8yOLXIhdzwPuBwqTsXhjq6fE4wSjCTAPhHReTRNQ2rIIlQM5pebKoMV4a1zFclYRdJl4FfqazqXchiRPV8KFWRFLludgfoPMzlc0Qah9XdzE8WFVAjhL+Jy7poaVGya9dquUXsI/d5+On1GIiDfasEWQUJkxSJu/V53C3qIOV7edpHlvygYxUasdVcF0ax77qNgXE3yfqh25Gq2gd3dQwg/4o+2oi/RAB0D0D/VY2TnlGDNAzToA2vqeCHWhviDCGTTEZUB6NGzKAKRyaVXwD3ZPkk0XFj2Qa/jFZDHOAN45IZ/YxVFM74s6PZA0J1Vu8f1CxZSY8cqSQDs34W99cJlie6AEPxn5GS1qLVa56ktCNRKadGMyVWas0Qu54i4MaC7VIb9oWX7LgIB7iqJzsMFkomcWFrlAdDcqABw7Nye8ZhfRT1aYYTKx6Bk+K5IZ9mZga/nUNQHPhrUv+NoDV7mVZ1PHEbLqOM2pYsFlacg/PguB72So2uFi4haa+BvrzlrXRpdGEgmo9g32paubY=
+before_install:
+- openssl aes-256-cbc -K $encrypted_3b3981d07fc8_key -iv $encrypted_3b3981d07fc8_iv
+  -in session_cookie.enc -out fastlane/session_cookie -d
+- sh fastlane/session_cookie
