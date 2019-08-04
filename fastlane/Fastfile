@@ -20,14 +20,26 @@ default_platform(:ios)
 platform :ios do
   desc "Push a new beta build to TestFlight"
   lane :beta do
-    get_certificates
-    get_provisioning_profile
+    # Certificates and Profiles
+    match(
+      readonly: true,
+      type: "appstore"
+    )
+
     increment_version_number
-    build_app(scheme: "LearnContinuousIntegration")
-    upload_to_testflight
+
+    # Build the app
+    gym(
+      scheme: "LearnContinuousIntegration",
+      export_xcargs: "-allowProvisioningUpdates"
+    )
+
+    upload_to_testflight(
+      skip_waiting_for_build_processing: true
+    )
   end
 
   lane :tests do
-    run_tests(scheme: "LearnContinuousIntegration")
+    scan(scheme: "LearnContinuousIntegration")
   end
 end
