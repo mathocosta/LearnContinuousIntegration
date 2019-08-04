@@ -23,7 +23,8 @@ platform :ios do
     # Certificates and Profiles
     match(
       readonly: true,
-      type: "appstore"
+      type: "appstore",
+      git_url: "https://github.com/mathocosta/fastlane-match.git"
     )
 
     increment_version_number
